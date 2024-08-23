@@ -6,6 +6,7 @@ import Dropdown from "@/Components/Dropdown.vue";
 import DropdownLink from "@/Components/DropdownLink.vue";
 import NavLink from "@/Components/NavLink.vue";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink.vue";
+import ThemeDropdownMenu from "@/Components/Menus/ThemeDropdownMenu.vue";
 
 const showingNavigationDropdown = ref(false);
 
@@ -141,6 +142,11 @@ const logout = () => {
                 </div>
               </template>
             </Dropdown>
+          </div>
+
+          <!-- Themes Dropdown-->
+          <div>
+            <ThemeDropdownMenu />
           </div>
 
           <!-- Settings Dropdown -->
