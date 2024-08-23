@@ -1,7 +1,6 @@
 <script setup>
 import { Head } from "@inertiajs/vue3";
 import ApiTokenManager from "@/Pages/API/Partials/ApiTokenManager.vue";
-import AppLayout from "@/Layouts/AppLayout.vue";
 import PageHeader from "@/Components/PageHeader.vue";
 
 defineProps({
@@ -13,17 +12,15 @@ defineProps({
 
 <template>
   <Head title="API Tokens" />
-  <AppLayout title="API Tokens">
-    <PageHeader title="API Tokens" />
+  <PageHeader title="API Tokens" />
 
-    <div>
-      <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-        <ApiTokenManager
-          :tokens="tokens"
-          :available-permissions="availablePermissions"
-          :default-permissions="defaultPermissions"
-        />
-      </div>
+  <div>
+    <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+      <ApiTokenManager
+        :tokens="tokens"
+        :available-permissions="availablePermissions"
+        :default-permissions="defaultPermissions"
+      />
     </div>
-  </AppLayout>
+  </div>
 </template>
