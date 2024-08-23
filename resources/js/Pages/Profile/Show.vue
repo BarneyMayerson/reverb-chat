@@ -1,6 +1,4 @@
 <script setup>
-import { Head } from "@inertiajs/vue3";
-import AppLayout from "@/Layouts/AppLayout.vue";
 import PageHeader from "@/Components/PageHeader.vue";
 import DeleteUserForm from "@/Pages/Profile/Partials/DeleteUserForm.vue";
 import LogoutOtherBrowserSessionsForm from "@/Pages/Profile/Partials/LogoutOtherBrowserSessionsForm.vue";
@@ -16,7 +14,6 @@ defineProps({
 </script>
 
 <template>
-  <Head title="Profile" />
   <PageHeader title="Profile" />
 
   <div>

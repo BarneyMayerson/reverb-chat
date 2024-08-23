@@ -1,12 +1,9 @@
 <script setup>
-import { Head } from "@inertiajs/vue3";
-import AppLayout from "@/Layouts/AppLayout.vue";
 import Welcome from "@/Components/Welcome.vue";
 import PageHeader from "@/Components/PageHeader.vue";
 </script>
 
 <template>
-  <Head title="Dasboard" />
   <PageHeader title="Dashboard" />
 
   <div class="py-12">
