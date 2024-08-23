@@ -13,7 +13,7 @@ defineProps({
     <Head :title="title" />
 
     <Banner />
-    <PrimaryMenu />
+    <PrimaryMenu v-if="$page.props.auth.user" />
 
     <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
       <!-- Page Heading -->
