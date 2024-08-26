@@ -1,6 +1,5 @@
 <script setup>
 import { Head } from "@inertiajs/vue3";
-import Welcome from "@/Components/Welcome.vue";
 </script>
 
 <template>
@@ -11,7 +10,7 @@ import Welcome from "@/Components/Welcome.vue";
       <div
         class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg"
       >
-        <Welcome />
+        &nbsp;
       </div>
     </div>
   </div>

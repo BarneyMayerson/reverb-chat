@@ -8,6 +8,11 @@ import NavLink from "@/Components/NavLink.vue";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink.vue";
 import ThemeDropdownMenu from "@/Components/Menus/ThemeDropdownMenu.vue";
 
+defineProps({
+  hasAuthUser: Boolean,
+  currentRoute: String,
+});
+
 const showingNavigationDropdown = ref(false);
 
 const logout = () => {
@@ -25,7 +30,7 @@ const logout = () => {
         <div class="flex">
           <!-- Logo -->
           <div class="shrink-0 flex items-center">
-            <Link :href="route('dashboard')">
+            <Link :href="route('root')">
               <ApplicationMark class="block h-9 w-auto" />
             </Link>
           </div>
@@ -33,11 +38,18 @@ const logout = () => {
           <!-- Navigation Links -->
           <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
             <NavLink
+              v-if="hasAuthUser"
               :href="route('dashboard')"
               :active="route().current('dashboard')"
             >
               Dashboard
             </NavLink>
+            <!-- <NavLink
+              :href="route('reactions')"
+              :active="route().current('reactions.index')"
+            >
+              Reactions
+            </NavLink> -->
           </div>
         </div>
 
@@ -150,7 +162,7 @@ const logout = () => {
           </div>
 
           <!-- Settings Dropdown -->
-          <div class="ms-3 relative">
+          <div v-if="hasAuthUser" class="ms-3 relative">
             <Dropdown align="right" width="48">
               <template #trigger>
                 <button
@@ -215,6 +227,10 @@ const logout = () => {
               </template>
             </Dropdown>
           </div>
+          <div v-else class="hidden sm:flex">
+            <NavLink :href="route('login')" class="ms-4">Login</NavLink>
+            <NavLink :href="route('register')" class="ms-4">Register</NavLink>
+          </div>
         </div>
 
         <!-- Hamburger -->
@@ -266,6 +282,7 @@ const logout = () => {
     >
       <div class="pt-2 pb-3 space-y-1">
         <ResponsiveNavLink
+          v-if="hasAuthUser"
           :href="route('dashboard')"
           :active="route().current('dashboard')"
         >
@@ -274,7 +291,10 @@ const logout = () => {
       </div>
 
       <!-- Responsive Settings Options -->
-      <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
+      <div
+        v-if="hasAuthUser"
+        class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600"
+      >
         <div class="flex items-center px-4">
           <div
             v-if="$page.props.jetstream.managesProfilePhotos"
@@ -378,6 +398,20 @@ const logout = () => {
             </template>
           </template>
         </div>
+      </div>
+      <div v-else class="">
+        <ResponsiveNavLink
+          :href="route('login')"
+          :active="route().current('login')"
+        >
+          Login
+        </ResponsiveNavLink>
+        <ResponsiveNavLink
+          :href="route('register')"
+          :active="route().current('register')"
+        >
+          Register
+        </ResponsiveNavLink>
       </div>
     </div>
   </nav>

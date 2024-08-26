@@ -11,7 +11,7 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-});
+})->name('root');
 
 Route::middleware([
     'auth:sanctum',

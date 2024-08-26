@@ -1,19 +1,16 @@
 <script setup>
-import { Head } from "@inertiajs/vue3";
 import Banner from "@/Components/Banner.vue";
 import PrimaryMenu from "@/Components/Menus/PrimaryMenu.vue";
-
-defineProps({
-  title: String,
-});
 </script>
 
 <template>
   <div>
-    <Head :title="title" />
-
     <Banner />
-    <PrimaryMenu v-if="$page.props.auth.user" />
+
+    <PrimaryMenu
+      :has-auth-user="!!$page.props.auth.user"
+      :current-route="route().current()"
+    />
 
     <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
       <!-- Page Heading -->
