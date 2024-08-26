@@ -1,6 +1,6 @@
 <script setup>
+import { Head } from "@inertiajs/vue3";
 import ApiTokenManager from "@/Pages/API/Partials/ApiTokenManager.vue";
-import PageHeader from "@/Components/PageHeader.vue";
 
 defineProps({
   tokens: Array,
@@ -10,7 +10,7 @@ defineProps({
 </script>
 
 <template>
-  <PageHeader title="API Tokens" />
+  <Head title="API Tokens" />
 
   <div>
     <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">

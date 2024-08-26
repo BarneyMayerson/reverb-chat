@@ -1,5 +1,5 @@
 <script setup>
-import PageHeader from "@/Components/PageHeader.vue";
+import { Head } from "@inertiajs/vue3";
 import DeleteUserForm from "@/Pages/Profile/Partials/DeleteUserForm.vue";
 import LogoutOtherBrowserSessionsForm from "@/Pages/Profile/Partials/LogoutOtherBrowserSessionsForm.vue";
 import SectionBorder from "@/Components/SectionBorder.vue";
@@ -14,7 +14,7 @@ defineProps({
 </script>
 
 <template>
-  <PageHeader title="Profile" />
+  <Head title="Profile" />
 
   <div>
     <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
