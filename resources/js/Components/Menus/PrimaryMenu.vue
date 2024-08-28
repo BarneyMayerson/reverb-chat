@@ -44,12 +44,12 @@ const logout = () => {
             >
               Dashboard
             </NavLink>
-            <!-- <NavLink
-              :href="route('reactions')"
-              :active="route().current('reactions.index')"
+            <NavLink
+              :href="route('chats.index')"
+              :active="route().current('chats.index')"
             >
-              Reactions
-            </NavLink> -->
+              Chats
+            </NavLink>
           </div>
         </div>
 
@@ -287,6 +287,13 @@ const logout = () => {
           :active="route().current('dashboard')"
         >
           Dashboard
+        </ResponsiveNavLink>
+        <ResponsiveNavLink
+          v-if="hasAuthUser"
+          :href="route('chats.index')"
+          :active="route().current('chats.index')"
+        >
+          Chats
         </ResponsiveNavLink>
       </div>
 

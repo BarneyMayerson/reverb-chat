@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ReactionController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -25,3 +26,13 @@ Route::middleware([
 });
 
 Route::post('/', [ReactionController::class, 'store'])->name('reactions.store');
+
+Route::controller(ChatController::class)
+    ->middleware('auth')
+    ->prefix('chats')
+    ->as('chats.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/{chat}', 'show')->name('show');
+        Route::post('/{chat}/message', 'message')->name('message');
+    });

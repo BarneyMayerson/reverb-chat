@@ -20,7 +20,7 @@ import PrimaryMenu from "@/Components/Menus/PrimaryMenu.vue";
         </div>
       </header>
       <!-- Page Content -->
-      <main>
+      <main class="text-gray-950 dark:text-gray-50">
         <slot />
       </main>
     </div>
