@@ -21,23 +21,26 @@ class ChatController extends Controller
 
     public function show(Chat $chat)
     {
-        return Inertia::render('Chats/Show');
-        // return Inertia::render('Chats/Show', [
-        //     'chat' => $chat,
-        //     'companion' => $chat->companion,
-        //     'messages' => $chat->messages,
-        // ]);
+        $this->authorize('view', $chat);
+
+        $chat->load('messages');
+
+        return Inertia::render('Chats/Show', [
+            'chat' => ChatResource::make($chat),
+        ]);
     }
 
     public function message(Request $request, Chat $chat)
     {
+        $this->authorize('message', $chat);
+
         $request->validate([
-            'message' => 'required|string|min:1|max:240',
+            'text' => 'required|string|min:1|max:240',
         ]);
 
         $chat->messages()->create([
             'sender_id' => Auth::user()->id,
-            'message' => $request('message'),
+            'message' => $request->input('text'),
         ]);
 
         return to_route('chats.show', $chat);

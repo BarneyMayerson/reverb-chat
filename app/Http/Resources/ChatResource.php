@@ -19,6 +19,7 @@ class ChatResource extends JsonResource
             'partner' => UserResource::make($this->partner()),
             'initiator' => UserResource::make($this->whenExistsLoaded('initiator')),
             'recipient' => UserResource::make($this->whenExistsLoaded('recipient')),
+            'messages' => MessageResource::collection($this->whenLoaded('messages')),
             'updated_at' => $this->updated_at,
             'created_at' => $this->created_at,
         ];
