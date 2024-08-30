@@ -1,9 +1,13 @@
 <script setup>
-import { Head, Link } from "@inertiajs/vue3";
+import { Head, Link, usePage } from "@inertiajs/vue3";
 import ChatMessage from "@/Components/ChatMessage.vue";
 import MessageForm from "@/Components/Forms/Chat/MessageForm.vue";
 
 const props = defineProps(["chat"]);
+
+const page = usePage();
+
+const me = page.props.auth.user;
 </script>
 
 <template>
@@ -23,11 +27,11 @@ const props = defineProps(["chat"]);
         <template v-for="message in chat.messages" :key="message.id">
           <div class="w-full space-y-2">
             <ChatMessage
-              :align-right="message.sender_id === $page.props.auth.user.id"
+              :align-right="message.sender_id === me.id"
               :message
               :imageSrc="
-                message.sender_id === $page.props.auth.user.id
-                  ? $page.props.auth.user.profile_photo_url
+                message.sender_id === me.id
+                  ? me.profile_photo_url
                   : chat.partner.profile_photo_url
               "
             />
