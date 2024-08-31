@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\Chat\MessageSent;
 use App\Http\Resources\ChatResource;
+use App\Http\Resources\MessageResource;
 use App\Models\Chat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -38,10 +40,12 @@ class ChatController extends Controller
             'text' => 'required|string|min:1|max:240',
         ]);
 
-        $chat->messages()->create([
+        $message = $chat->messages()->create([
             'sender_id' => Auth::user()->id,
             'message' => $request->input('text'),
         ]);
+
+        event(MessageSent::make(ChatResource::make($chat), MessageResource::make($message)));
 
         return to_route('chats.show', $chat);
     }
