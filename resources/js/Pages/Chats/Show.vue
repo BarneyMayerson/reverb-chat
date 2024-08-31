@@ -1,13 +1,13 @@
 <script setup>
 import { nextTick, onMounted, ref, watch } from "vue";
 import { Head, Link, usePage } from "@inertiajs/vue3";
-import ChatMessage from "@/Components/ChatMessage.vue";
+import MyMessage from "@/Components/Chat/MyMessage.vue";
+import PartnerMessage from "@/Components/Chat/PartnerMessage.vue";
 import MessageForm from "@/Components/Forms/Chat/MessageForm.vue";
 
 const props = defineProps(["chat"]);
 
-const messages = ref();
-messages.value = props.chat.messages;
+const messages = ref(props.chat.messages);
 
 const page = usePage();
 
@@ -53,40 +53,34 @@ watch(
         </Link>
         .
       </h3>
-      <div class="flex flex-col justify-end h-80">
+      <div
+        class="flex flex-col justify-end h-96 py-2 mt-8 border border-gray-300 dark:border-gray-800 rounded-lg"
+      >
         <div ref="messagesContainer" class="p-4 overflow-y-auto max-h-fit">
           <div
             v-for="message in messages"
             :key="message.id"
-            class="flex items-center mb-2"
+            class="flex items-center mb-4"
           >
             <div
               v-if="message.sender_id === me.id"
-              class="p-2 ml-auto text-white bg-blue-500 rounded-lg"
+              class="py-2 px-4 w-5/6 ml-auto text-white bg-blue-500 dark:bg-blue-700 rounded-lg"
             >
-              {{ message.text }}
+              <MyMessage :message />
             </div>
-            <div v-else class="p-2 mr-auto bg-gray-200 rounded-lg">
-              {{ message.text }}
+            <div
+              v-else
+              class="py-2 px-4 w-5/6 mr-auto bg-gray-200 dark:bg-gray-700 dark:text-gray-50 rounded-lg"
+            >
+              <PartnerMessage
+                :message
+                :imageSrc="chat.partner.profile_photo_url"
+              />
             </div>
           </div>
         </div>
       </div>
-      <div
-        class="mt-16 flex flex-col overflow-y-auto h-96 border border-gray-300 dark:border-gray-700 rounded-lg px-4"
-      >
-        <div v-for="message in messages" :key="message.id">
-          <ChatMessage
-            :align-right="message.sender_id === me.id"
-            :message
-            :imageSrc="
-              message.sender_id === me.id
-                ? me.profile_photo_url
-                : chat.partner.profile_photo_url
-            "
-          />
-        </div>
-      </div>
+
       <MessageForm :chat class="mt-6" />
     </div>
   </div>
