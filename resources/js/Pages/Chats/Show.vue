@@ -1,9 +1,12 @@
 <script setup>
 import { nextTick, onMounted, ref, watch } from "vue";
-import { Head, Link, usePage } from "@inertiajs/vue3";
+import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
 import MyMessage from "@/Components/Chat/MyMessage.vue";
 import PartnerMessage from "@/Components/Chat/PartnerMessage.vue";
-import MessageForm from "@/Components/Forms/Chat/MessageForm.vue";
+import InputLabel from "@/Components/InputLabel.vue";
+import TextArea from "@/Components/TextArea.vue";
+import InputError from "@/Components/InputError.vue";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
 
 const props = defineProps(["chat"]);
 
@@ -13,12 +16,43 @@ const page = usePage();
 
 const me = page.props.auth.user;
 
-onMounted(() => {
-  Echo.private(`Chat.${props.chat.id}`).listen("Chat\\MessageSent", (e) => {
+const form = useForm("MessageForm", {
+  text: "",
+});
+
+const submit = () => {
+  form.post(
+    route("chats.message", {
+      chat: props.chat,
+      text: form.text,
+    }),
+    {
+      preserveScroll: true,
+      onSuccess: () => {
+        form.text = "";
+      },
+    }
+  );
+};
+
+const isPartnerTyping = ref(false);
+
+const channel = Echo.private(`Chat.${props.chat.id}`)
+  .listen("Chat\\MessageSent", (e) => {
     const message = e.message;
     messages.value.push(message);
+  })
+  .listenForWhisper("typing", (response) => {
+    isPartnerTyping.value = response.userId === props.chat.partner.id;
   });
 
+const sendTypingEvent = () => {
+  channel.whisper("typing", {
+    userId: me.id,
+  });
+};
+
+onMounted(() => {
   scrollMessagesContainer();
 });
 
@@ -81,7 +115,32 @@ watch(
         </div>
       </div>
 
-      <MessageForm :chat class="mt-6" />
+      <form class="mt-6" @submit.prevent="submit">
+        <InputLabel for="message" value="New message" class="ml-3" />
+        <TextArea
+          @keydown="sendTypingEvent()"
+          id="message"
+          rows="3"
+          v-model="form.text"
+          class="mt-1 block w-full"
+        />
+        <InputError :message="form.errors.text" class="mt-2" />
+
+        <div class="mt-1.5 ml-3">
+          <p v-if="isPartnerTyping" class="text-xs font-bold tracking-wide">
+            {{ chat.partner.name }} is typing ...
+          </p>
+        </div>
+
+        <div class="mt-6 flex justify-end">
+          <PrimaryButton
+            :class="{ 'opacity-25': form.processing }"
+            :disabled="form.processing"
+          >
+            Send
+          </PrimaryButton>
+        </div>
+      </form>
     </div>
   </div>
 </template>
