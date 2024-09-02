@@ -52,7 +52,7 @@ const channel = Echo.private(`Chat.${props.chat.id}`)
 
     partnerTypingTimer.value = setTimeout(() => {
       isPartnerTyping.value = false;
-    }, 1000);
+    }, 1500);
   });
 
 const sendTypingEvent = () => {
@@ -136,12 +136,15 @@ watch(
         <InputError :message="form.errors.text" class="mt-2" />
 
         <div class="mt-1.5 ml-3">
-          <p v-if="isPartnerTyping" class="text-xs font-bold tracking-wide">
+          <p
+            class="text-xs font-bold tracking-wide transition-opacity"
+            :class="isPartnerTyping ? 'opacity-100' : 'opacity-0'"
+          >
             {{ chat.partner.name }} is typing ...
           </p>
         </div>
 
-        <div class="mt-6 flex justify-end">
+        <div class="mt-1 flex justify-end">
           <PrimaryButton
             :class="{ 'opacity-25': form.processing }"
             :disabled="form.processing"
