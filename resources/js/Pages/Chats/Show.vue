@@ -36,6 +36,7 @@ const submit = () => {
 };
 
 const isPartnerTyping = ref(false);
+const partnerTypingTimer = ref(null);
 
 const channel = Echo.private(`Chat.${props.chat.id}`)
   .listen("Chat\\MessageSent", (e) => {
@@ -44,6 +45,14 @@ const channel = Echo.private(`Chat.${props.chat.id}`)
   })
   .listenForWhisper("typing", (response) => {
     isPartnerTyping.value = response.userId === props.chat.partner.id;
+
+    if (partnerTypingTimer.value) {
+      clearTimeout(partnerTypingTimer.value);
+    }
+
+    partnerTypingTimer.value = setTimeout(() => {
+      isPartnerTyping.value = false;
+    }, 1000);
   });
 
 const sendTypingEvent = () => {
