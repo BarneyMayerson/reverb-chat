@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ReactionController;
+use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -26,6 +27,10 @@ Route::middleware([
 });
 
 Route::post('/', [ReactionController::class, 'store'])->name('reactions.store');
+
+Route::controller(UserController::class)->prefix('users')->as('users.')->group(function () {
+    Route::get('/', 'index')->name('index');
+});
 
 Route::controller(ChatController::class)
     ->middleware('auth')
