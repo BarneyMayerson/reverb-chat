@@ -13,7 +13,7 @@ const props = defineProps(["chats"]);
           Your Chats
         </h2>
       </div>
-      <div class="block md:grid md:grid-cols-2 xl:grid-cols-3 gap-4">
+      <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3 md:gap-8">
         <Link
           v-for="chat in chats"
           :key="chat.id"
