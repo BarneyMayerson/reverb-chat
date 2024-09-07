@@ -4,19 +4,29 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class UserController extends Controller
 {
-    public function index(): Response
+    public function index(Request $request): Response
     {
-        $users = User::query()->latest()->latest('id')->paginate();
+        $users = User::query()
+            ->when(
+                $request->query('query'),
+                fn (Builder $query) => $query->whereLike('name', '%'.$request->query('query').'%'))
+            ->latest()
+            ->latest('id')
+            ->paginate()
+            ->withQueryString();
 
         return Inertia::render('Users/Index', [
             'users' => UserResource::collection($users),
             'you' => Auth::user(),
+            'query' => $request->query('query'),
         ]);
     }
 }
