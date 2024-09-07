@@ -1,11 +1,35 @@
 <script setup>
-import { computed } from "vue";
-import { Head, Link } from "@inertiajs/vue3";
+import { computed, onMounted, onUnmounted, ref } from "vue";
+import { Head, Link, router } from "@inertiajs/vue3";
 import Pagination from "@/Components/Pagination.vue";
 
 const props = defineProps(["users", "you"]);
 
 const showPagination = computed(() => props.users.meta.last_page > 1);
+
+const onlineUsers = ref([]);
+
+Echo.join("OnlineUsers")
+  .here((users) => (onlineUsers.value = users))
+  .joining((user) =>
+    router.reload({
+      onSuccess: () => {
+        onlineUsers.value.push(user);
+      },
+    })
+  )
+  .leaving(
+    (user) =>
+      (onlineUsers.value = onlineUsers.value.filter(({ id }) => id !== user.id))
+  );
+
+onMounted(() => {
+  Echo.join("OnlineUsers").here((users) => (onlineUsers.value = users));
+});
+
+onUnmounted(() => {
+  Echo.leave("OnlineUsers");
+});
 </script>
 
 <template>
@@ -26,11 +50,19 @@ const showPagination = computed(() => props.users.meta.last_page > 1);
         >
           <Link :href="route('users.index')">
             <div class="p-4">
-              <div class="flex items-center">
+              <div class="flex items-center space-x-2">
                 <span>{{ user.name }}</span>
                 <span
+                  class="size-2 rounded-full"
+                  :class="
+                    onlineUsers.find(({ id }) => id === user.id)
+                      ? 'bg-green-500'
+                      : 'bg-red-500'
+                  "
+                ></span>
+                <span
                   v-if="you?.id === user.id"
-                  class="ml-2 text-xs rounded-lg px-2 py-0.5 bg-blue-300 dark:bg-blue-600"
+                  class="text-xs rounded-lg px-2 py-0.5 bg-blue-300 dark:bg-blue-600"
                 >
                   it's you
                 </span>
