@@ -82,7 +82,7 @@ const clearSearch = () => {
           :key="user.id"
           class="overflow-hidden shadow-sm sm:rounded-lg bg-gray-200 dark:bg-gray-700 dark:text-gray-50 hover:scale-105 duration-200"
         >
-          <Link :href="route('users.index')">
+          <Link :href="route('users.show', user.id)">
             <div class="p-4">
               <div class="flex items-center space-x-2">
                 <span>{{ user.name }}</span>

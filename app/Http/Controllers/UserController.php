@@ -29,4 +29,11 @@ class UserController extends Controller
             'query' => $request->query('query'),
         ]);
     }
+
+    public function show(Request $request, User $user): Response
+    {
+        return Inertia::render('Users/Show', [
+            'user' => UserResource::make($user),
+        ]);
+    }
 }

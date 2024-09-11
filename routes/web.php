@@ -30,6 +30,7 @@ Route::post('/', [ReactionController::class, 'store'])->name('reactions.store');
 
 Route::controller(UserController::class)->prefix('users')->as('users.')->group(function () {
     Route::get('/', 'index')->name('index');
+    Route::get('/{user}', 'show')->name('show');
 });
 
 Route::controller(ChatController::class)
