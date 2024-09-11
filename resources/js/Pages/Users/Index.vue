@@ -87,6 +87,7 @@ const clearSearch = () => {
               <div class="flex items-center space-x-2">
                 <span>{{ user.name }}</span>
                 <span
+                  v-if="you"
                   class="size-2 rounded-full"
                   :class="
                     onlineUsers.find(({ id }) => id === user.id)
