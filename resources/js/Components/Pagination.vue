@@ -17,8 +17,10 @@ const only = computed(() =>
   props.only.length === 0 ? [] : [...props.only, "jetstream"]
 );
 
-const previousUrl = computed(() => props.meta.links[0].url);
-const nextUrl = computed(() => [...props.meta.links].reverse()[0].url);
+const previousUrl = computed(() => props.meta.links[0].url ?? "null");
+const nextUrl = computed(
+  () => [...props.meta.links].reverse()[0].url ?? "null"
+);
 </script>
 
 <template>
@@ -64,7 +66,7 @@ const nextUrl = computed(() => [...props.meta.links].reverse()[0].url);
         >
           <Link
             v-for="link in meta.links"
-            :href="link.url"
+            :href="link.url ?? 'null'"
             :only="only"
             class="relative inline-flex items-center first-of-type:rounded-l-md last-of-type:rounded-r-md px-3 py-2"
             :class="{

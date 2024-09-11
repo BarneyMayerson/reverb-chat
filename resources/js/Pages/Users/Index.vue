@@ -13,22 +13,24 @@ const showPagination = computed(() => props.users.meta.last_page > 1);
 
 const onlineUsers = ref([]);
 
-Echo.join("OnlineUsers")
-  .here((users) => (onlineUsers.value = users))
-  .joining((user) =>
-    router.reload({
-      onSuccess: () => {
-        onlineUsers.value.push(user);
-      },
-    })
-  )
-  .leaving(
-    (user) =>
-      (onlineUsers.value = onlineUsers.value.filter(({ id }) => id !== user.id))
-  );
-
 onMounted(() => {
-  Echo.join("OnlineUsers").here((users) => (onlineUsers.value = users));
+  if (props.you) {
+    Echo.join("OnlineUsers")
+      .here((users) => (onlineUsers.value = users))
+      .joining((user) =>
+        router.reload({
+          onSuccess: () => {
+            onlineUsers.value.push(user);
+          },
+        })
+      )
+      .leaving(
+        (user) =>
+          (onlineUsers.value = onlineUsers.value.filter(
+            ({ id }) => id !== user.id
+          ))
+      );
+  }
 });
 
 onUnmounted(() => {
