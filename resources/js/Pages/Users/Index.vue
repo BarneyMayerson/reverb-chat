@@ -37,6 +37,9 @@ onUnmounted(() => {
   Echo.leave("OnlineUsers");
 });
 
+const isUserOnline = (user) =>
+  onlineUsers.value.find(({ id }) => id === user.id);
+
 const searchForm = useForm({
   query: props.query,
   page: 1,
@@ -91,11 +94,7 @@ const clearSearch = () => {
                 <span
                   v-if="you"
                   class="size-2 rounded-full"
-                  :class="
-                    onlineUsers.find(({ id }) => id === user.id)
-                      ? 'bg-green-500'
-                      : 'bg-red-500'
-                  "
+                  :class="isUserOnline(user) ? 'bg-green-500' : 'bg-red-500'"
                 ></span>
                 <span
                   v-if="you?.id === user.id"
