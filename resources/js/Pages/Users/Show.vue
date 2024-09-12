@@ -53,6 +53,7 @@ const isOnline = () => onlineUsers.value.find(({ id }) => id === props.user.id);
             class="rounded-full h-20 w-20 object-cover"
           />
           <span
+            v-if="you"
             class="absolute right-0 bottom-0 size-3 rounded-full"
             :class="isOnline() ? 'bg-green-500' : 'bg-red-500'"
           ></span>

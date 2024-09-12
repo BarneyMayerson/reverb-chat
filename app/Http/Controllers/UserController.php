@@ -25,7 +25,7 @@ class UserController extends Controller
 
         return Inertia::render('Users/Index', [
             'users' => UserResource::collection($users),
-            'you' => UserResource::make(Auth::user()),
+            'you' => Auth::check() ? UserResource::make(Auth::user()) : null,
             'query' => $request->query('query'),
         ]);
     }
@@ -34,7 +34,7 @@ class UserController extends Controller
     {
         return Inertia::render('Users/Show', [
             'user' => UserResource::make($user),
-            'you' => UserResource::make(Auth::user()),
+            'you' => Auth::check() ? UserResource::make(Auth::user()) : null,
         ]);
     }
 }
