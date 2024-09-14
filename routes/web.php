@@ -40,5 +40,6 @@ Route::controller(ChatController::class)
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/{chat}', 'show')->name('show');
+        Route::post('/', 'store')->name('store');
         Route::post('/{chat}/message', 'message')->name('message');
     });

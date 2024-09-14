@@ -56,4 +56,14 @@ class Chat extends Model
             ->orWhere('recipient_id', $userId)
             ->get();
     }
+
+    public static function findWith(int $userId): ?self
+    {
+        return self::query()
+            ->where('initiator_id', Auth::id())
+            ->where('recipient_id', $userId)
+            ->orWhere('initiator_id', $userId)
+            ->where('recipient_id', Auth::id())
+            ->first();
+    }
 }
