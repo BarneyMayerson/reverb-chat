@@ -6,6 +6,7 @@ use App\Events\Chat\MessageSent;
 use App\Http\Resources\ChatResource;
 use App\Http\Resources\MessageResource;
 use App\Models\Chat;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -32,6 +33,11 @@ class ChatController extends Controller
         return Inertia::render('Chats/Show', [
             'chat' => ChatResource::make($chat),
         ]);
+    }
+
+    public function create(User $user)
+    {
+        return $user->toArray();
     }
 
     public function store(Request $request)

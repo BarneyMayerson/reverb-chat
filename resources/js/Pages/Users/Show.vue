@@ -1,9 +1,10 @@
 <script setup>
 import { computed, onMounted, onUnmounted, ref } from "vue";
-import { Head } from "@inertiajs/vue3";
+import { Head, Link } from "@inertiajs/vue3";
 import { distanceToNow } from "@/utilities/date";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
 
-const props = defineProps(["user", "you"]);
+const props = defineProps(["user", "you", "chat_id"]);
 
 const formattedDate = computed(() => distanceToNow(props.user.created_at));
 
@@ -61,6 +62,19 @@ const isOnline = () => onlineUsers.value.find(({ id }) => id === props.user.id);
         <div>
           <p class="text-xl">{{ user.name }}</p>
           <p class="text-xs mt-1">Since {{ formattedDate }}</p>
+        </div>
+      </div>
+
+      <div class="mt-4">
+        <div v-if="chat_id">
+          <Link :href="route('chats.show', chat_id)">
+            <PrimaryButton>Go to chat</PrimaryButton>
+          </Link>
+        </div>
+        <div v-else>
+          <Link :href="route('chats.create', user.id)">
+            <PrimaryButton>Start chat</PrimaryButton>
+          </Link>
         </div>
       </div>
     </div>

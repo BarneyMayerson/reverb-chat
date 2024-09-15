@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\UserResource;
+use App\Models\Chat;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -35,6 +36,7 @@ class UserController extends Controller
         return Inertia::render('Users/Show', [
             'user' => UserResource::make($user),
             'you' => Auth::check() ? UserResource::make(Auth::user()) : null,
+            'chat_id' => Chat::findWith($user->id)?->id,
         ]);
     }
 }
