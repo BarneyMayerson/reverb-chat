@@ -16,12 +16,12 @@ return new class extends Migration
             $table->foreignId('chat_id')
                 ->nullable()
                 ->constrained()
-                ->nullOnDelete();
+                ->cascadeOnDelete();
             $table->foreignId('sender_id')
                 ->nullable()
                 ->constrained('users')
                 ->nullOnDelete();
-            $table->text('message')->nullable();
+            $table->text('message');
             $table->timestamps();
         });
     }
