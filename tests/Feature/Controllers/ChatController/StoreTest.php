@@ -9,7 +9,6 @@ use function Pest\Laravel\assertDatabaseCount;
 use function Pest\Laravel\assertDatabaseEmpty;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\post;
-use function Pest\Laravel\withoutExceptionHandling;
 
 beforeEach(function () {
     $this->validData = fn () => [
@@ -23,7 +22,6 @@ it('requires authentication', function () {
 });
 
 it('stores a chat', function () {
-    withoutExceptionHandling();
     $me = User::factory()->create();
 
     $data = value($this->validData);
@@ -34,6 +32,7 @@ it('stores a chat', function () {
         'initiator_id' => $me->id,
         'recipient_id' => $data['recipient_id'],
     ]);
+    assertDatabaseCount(Chat::class, 1);
 });
 
 it('requires a valid data', function (array $badData, array|string $errors) {

@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use App\Events\Chat\MessageSent;
 use App\Http\Resources\ChatResource;
 use App\Http\Resources\MessageResource;
+use App\Http\Resources\UserResource;
 use App\Models\Chat;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 
@@ -37,7 +37,9 @@ class ChatController extends Controller
 
     public function create(User $user)
     {
-        return $user->toArray();
+        return Inertia::modal('Chats/Create', [
+            'user' => UserResource::make($user),
+        ])->baseRoute('users.index');
     }
 
     public function store(Request $request)
@@ -53,19 +55,15 @@ class ChatController extends Controller
             return to_route('chats.show', $chat);
         }
 
-        $chat = DB::transaction(function () use ($chat, $request) {
-            $chat = Chat::create([
-                'initiator_id' => Auth::id(),
-                'recipient_id' => $request->input('recipient_id'),
-            ]);
+        $chat = Chat::create([
+            'initiator_id' => Auth::id(),
+            'recipient_id' => $request->input('recipient_id'),
+        ]);
 
-            $chat->messages()->create([
-                'sender_id' => Auth::id(),
-                'message' => $request->input('message'),
-            ]);
-
-            return $chat;
-        });
+        $chat->messages()->create([
+            'sender_id' => Auth::id(),
+            'message' => $request->input('message'),
+        ]);
 
         return to_route('chats.show', $chat);
     }

@@ -1,4 +1,5 @@
 <script setup>
+import { Modal } from "momentum-modal";
 import Banner from "@/Components/Banner.vue";
 import PrimaryMenu from "@/Components/Menus/PrimaryMenu.vue";
 </script>
@@ -6,6 +7,8 @@ import PrimaryMenu from "@/Components/Menus/PrimaryMenu.vue";
 <template>
   <div>
     <Banner />
+
+    <Modal />
 
     <PrimaryMenu
       :has-auth-user="!!$page.props.auth.user"
