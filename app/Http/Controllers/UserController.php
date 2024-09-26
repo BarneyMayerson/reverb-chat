@@ -18,7 +18,7 @@ class UserController extends Controller
         $users = User::query()
             ->when(
                 $request->query('query'),
-                fn (Builder $query) => $query->whereLike('name', '%'.$request->query('query').'%'))
+                fn (Builder $query) => $query->whereLike('name', '%' . $request->query('query') . '%'))
             ->latest()
             ->latest('id')
             ->paginate()
