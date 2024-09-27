@@ -16,13 +16,7 @@ composer install
 Install NPM dependencies:
 
 ```sh
-npm ci
-```
-
-Build assets:
-
-```sh
-npm run dev
+npm i -D
 ```
 
 Setup configuration:
