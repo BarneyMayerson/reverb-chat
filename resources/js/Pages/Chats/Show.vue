@@ -7,7 +7,7 @@ const props = defineProps(["chat"]);
 
 <template>
   <Head title="Chat" />
-  <div class="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div class="px-4 py-8">
       <h3 class="text-xl">
         Your private chat with

@@ -22,13 +22,13 @@ onMounted(() => {
           onSuccess: () => {
             onlineUsers.value.push(user);
           },
-        })
+        }),
       )
       .leaving(
         (user) =>
           (onlineUsers.value = onlineUsers.value.filter(
-            ({ id }) => id !== user.id
-          ))
+            ({ id }) => id !== user.id,
+          )),
       );
   }
 });
@@ -59,7 +59,7 @@ const clearSearch = () => {
   <Head title="Users" />
   <div class="container mx-auto">
     <div class="p-6 sm:p-8">
-      <div class="flex justify-between items-center space-x-6">
+      <div class="flex items-center justify-between space-x-6">
         <h2 class="text-xl font-bold leading-tight tracking-tight md:text-2xl">
           Users List
         </h2>
@@ -85,7 +85,7 @@ const clearSearch = () => {
         <div
           v-for="user in users.data"
           :key="user.id"
-          class="overflow-hidden shadow-sm sm:rounded-lg bg-gray-200 dark:bg-gray-700 dark:text-gray-50 hover:scale-105 duration-200"
+          class="overflow-hidden bg-gray-200 shadow-sm duration-200 hover:scale-105 sm:rounded-lg dark:bg-gray-700 dark:text-gray-50"
         >
           <Link :href="route('users.show', user.id)">
             <div class="p-4">
@@ -98,7 +98,7 @@ const clearSearch = () => {
                 ></span>
                 <span
                   v-if="you?.id === user.id"
-                  class="text-xs rounded-lg px-2 py-0.5 bg-blue-300 dark:bg-blue-600"
+                  class="rounded-lg bg-blue-300 px-2 py-0.5 text-xs dark:bg-blue-600"
                 >
                   it's you
                 </span>

@@ -34,7 +34,7 @@ watch(
         showSlot.value = false;
       }, 200);
     }
-  }
+  },
 );
 
 const close = () => {
@@ -77,7 +77,7 @@ const maxWidthClass = computed(() => {
     ref="dialog"
   >
     <div
-      class="fixed inset-0 overflow-y-auto px-4 py-6 sm:px-0 z-50"
+      class="fixed inset-0 z-50 overflow-y-auto px-4 py-6 sm:px-0"
       scroll-region
     >
       <transition
@@ -94,7 +94,7 @@ const maxWidthClass = computed(() => {
           @click="close"
         >
           <div
-            class="absolute inset-0 bg-gray-500 dark:bg-gray-900 opacity-75"
+            class="absolute inset-0 bg-gray-500 opacity-75 dark:bg-gray-900"
           />
         </div>
       </transition>
@@ -109,7 +109,7 @@ const maxWidthClass = computed(() => {
       >
         <div
           v-show="show"
-          class="mb-6 bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-xl transform transition-all sm:w-full sm:mx-auto"
+          class="mb-6 transform overflow-hidden rounded-lg bg-white shadow-xl transition-all sm:mx-auto sm:w-full dark:bg-gray-800"
           :class="maxWidthClass"
         >
           <slot v-if="showSlot" />

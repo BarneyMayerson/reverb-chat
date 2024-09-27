@@ -79,7 +79,7 @@ const setSystemTheme = () => {
   <Dropdown :align :width>
     <template #trigger>
       <button
-        class="text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-100 dark:focus:bg-gray-700 transition duration-150 ease-in-out p-2"
+        class="p-2 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700 dark:focus:bg-gray-700"
       >
         <SunSolid v-if="theme === 'light'" />
         <MoonSolid v-if="theme === 'dark'" />

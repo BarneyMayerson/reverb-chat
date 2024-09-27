@@ -27,7 +27,7 @@ const confirmationForm = useForm({
 });
 
 const twoFactorEnabled = computed(
-  () => !enabling.value && page.props.auth.user?.two_factor_enabled
+  () => !enabling.value && page.props.auth.user?.two_factor_enabled,
 );
 
 watch(twoFactorEnabled, () => {
@@ -51,7 +51,7 @@ const enableTwoFactorAuthentication = () => {
         enabling.value = false;
         confirming.value = props.requiresConfirmation;
       },
-    }
+    },
   );
 };
 
@@ -156,7 +156,7 @@ const disableTwoFactorAuthentication = () => {
             </p>
           </div>
 
-          <div class="mt-4 p-2 inline-block bg-white" v-html="qrCode" />
+          <div class="mt-4 inline-block bg-white p-2" v-html="qrCode" />
 
           <div
             v-if="setupKey"
@@ -175,7 +175,7 @@ const disableTwoFactorAuthentication = () => {
               v-model="confirmationForm.code"
               type="text"
               name="code"
-              class="block mt-1 w-1/2"
+              class="mt-1 block w-1/2"
               inputmode="numeric"
               autofocus
               autocomplete="one-time-code"
@@ -196,7 +196,7 @@ const disableTwoFactorAuthentication = () => {
           </div>
 
           <div
-            class="grid gap-1 max-w-xl mt-4 px-4 py-4 font-mono text-sm bg-gray-100 dark:bg-gray-900 dark:text-gray-100 rounded-lg"
+            class="mt-4 grid max-w-xl gap-1 rounded-lg bg-gray-100 px-4 py-4 font-mono text-sm dark:bg-gray-900 dark:text-gray-100"
           >
             <div v-for="code in recoveryCodes" :key="code">
               {{ code }}

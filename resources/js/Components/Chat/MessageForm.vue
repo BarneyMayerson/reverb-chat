@@ -22,7 +22,7 @@ const submit = () => {
       onSuccess: () => {
         form.text = "";
       },
-    }
+    },
   );
 };
 
@@ -45,7 +45,7 @@ const sendTypingEvent = () => {
     />
     <InputError :message="form.errors.text" class="mt-2" />
 
-    <div class="mt-1.5 ml-3">
+    <div class="ml-3 mt-1.5">
       <p
         class="text-xs font-bold tracking-wide transition-opacity"
         :class="isPartnerTyping ? 'opacity-100' : 'opacity-0'"

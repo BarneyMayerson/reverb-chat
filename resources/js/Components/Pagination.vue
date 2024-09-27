@@ -14,12 +14,12 @@ const props = defineProps({
 });
 
 const only = computed(() =>
-  props.only.length === 0 ? [] : [...props.only, "jetstream"]
+  props.only.length === 0 ? [] : [...props.only, "jetstream"],
 );
 
 const previousUrl = computed(() => props.meta.links[0].url ?? "null");
 const nextUrl = computed(
-  () => [...props.meta.links].reverse()[0].url ?? "null"
+  () => [...props.meta.links].reverse()[0].url ?? "null",
 );
 </script>
 
@@ -29,14 +29,14 @@ const nextUrl = computed(
       <Link
         :href="previousUrl"
         :only="only"
-        class="relative inline-flex items-center rounded-md border border-gray-300 dark:border-gray-700 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800"
+        class="relative inline-flex items-center rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-800"
       >
         Previous
       </Link>
       <Link
         :href="nextUrl"
         :only="only"
-        class="relative inline-flex items-center rounded-md border border-gray-300 dark:border-gray-700 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800"
+        class="relative inline-flex items-center rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-800"
       >
         Next
       </Link>
@@ -68,11 +68,11 @@ const nextUrl = computed(
             v-for="link in meta.links"
             :href="link.url ?? 'null'"
             :only="only"
-            class="relative inline-flex items-center first-of-type:rounded-l-md last-of-type:rounded-r-md px-3 py-2"
+            class="relative inline-flex items-center px-3 py-2 first-of-type:rounded-l-md last-of-type:rounded-r-md"
             :class="{
-              '-z-10 bg-indigo-600 dark:bg-indigo-800 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:focus-visible:outline-indigo-800':
+              '-z-10 bg-indigo-600 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-800 dark:focus-visible:outline-indigo-800':
                 link.active,
-              'text-gray-900 dark:text-gray-200 ring-1 ring-inset ring-gray-300 dark:ring-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 focus:outline-offset-0':
+              'text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0 dark:text-gray-200 dark:ring-gray-700 dark:hover:bg-gray-800':
                 !link.active,
             }"
             v-html="link.label"

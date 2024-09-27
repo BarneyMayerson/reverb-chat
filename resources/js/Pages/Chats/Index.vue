@@ -7,18 +7,18 @@ const props = defineProps(["chats"]);
 <template>
   <Head title="Chats" />
   <section class="container mx-auto">
-    <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-      <div class="flex justify-between items-center">
+    <div class="space-y-4 p-6 sm:p-8 md:space-y-6">
+      <div class="flex items-center justify-between">
         <h2 class="text-xl font-bold leading-tight tracking-tight md:text-2xl">
           Your Chats
         </h2>
       </div>
-      <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3 md:gap-8">
+      <div class="grid gap-4 md:grid-cols-2 md:gap-8 xl:grid-cols-3">
         <Link
           v-for="chat in chats"
           :key="chat.id"
           :href="route('chats.show', chat.id)"
-          class="block p-4 rounded-lg border shadow"
+          class="block rounded-lg border p-4 shadow"
         >
           <div class="flex items-center space-x-2">
             <img

@@ -26,7 +26,7 @@ const submit = () => {
         form.message = "";
         close;
       },
-    }
+    },
   );
 };
 </script>
@@ -43,7 +43,7 @@ const submit = () => {
         <img
           :src="user.profile_photo_url"
           :alt="user.name"
-          class="rounded-full h-20 w-20 object-cover"
+          class="h-20 w-20 rounded-full object-cover"
         />
         <p>{{ user.name }}</p>
       </div>
@@ -54,7 +54,7 @@ const submit = () => {
         <TextArea id="message" v-model="form.message" />
         <InputError
           :message="form.errors.message"
-          class="mt-2 ml-1 text-left"
+          class="ml-1 mt-2 text-left"
         />
         <div class="mt-4">
           <SecondaryButton @click="close">Cancel</SecondaryButton>

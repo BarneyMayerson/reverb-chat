@@ -74,7 +74,7 @@ onUnmounted(() => {
             leave-to="opacity-0 -translate-y-full"
           >
             <DialogPanel
-              class="sm:w-full transform overflow-hidden rounded-2xl bg-white dark:bg-gray-800 p-6 text-left align-middle shadow-xl shadow-black transition-all md:px-10 md:py-10"
+              class="transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl shadow-black transition-all sm:w-full md:px-10 md:py-10 dark:bg-gray-800"
               :class="maxWidthClass"
             >
               <DialogTitle
@@ -87,7 +87,7 @@ onUnmounted(() => {
               <div class="absolute right-0 top-0 pr-4 pt-4">
                 <button
                   type="button"
-                  class="rounded focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150"
+                  class="rounded transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
                   @click="close"
                 >
                   <span class="sr-only">Close</span>

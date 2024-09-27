@@ -68,7 +68,7 @@ const closeModal = () => {
           <div>
             <svg
               v-if="session.agent.is_desktop"
-              class="w-8 h-8 text-gray-500"
+              class="h-8 w-8 text-gray-500"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -84,7 +84,7 @@ const closeModal = () => {
 
             <svg
               v-else
-              class="w-8 h-8 text-gray-500"
+              class="h-8 w-8 text-gray-500"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -101,9 +101,7 @@ const closeModal = () => {
 
           <div class="ms-3">
             <div class="text-sm text-gray-600 dark:text-gray-400">
-              {{
-                session.agent.platform ? session.agent.platform : "Unknown"
-              }}
+              {{ session.agent.platform ? session.agent.platform : "Unknown" }}
               - {{ session.agent.browser ? session.agent.browser : "Unknown" }}
             </div>
 
@@ -113,7 +111,7 @@ const closeModal = () => {
 
                 <span
                   v-if="session.is_current_device"
-                  class="text-green-500 font-semibold"
+                  class="font-semibold text-green-500"
                   >This device</span
                 >
                 <span v-else>Last active {{ session.last_active }}</span>
@@ -123,7 +121,7 @@ const closeModal = () => {
         </div>
       </div>
 
-      <div class="flex items-center mt-5">
+      <div class="mt-5 flex items-center">
         <PrimaryButton @click="confirmLogout">
           Log Out Other Browser Sessions
         </PrimaryButton>

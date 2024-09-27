@@ -53,29 +53,29 @@ watch(
       scrollMessagesContainer();
     });
   },
-  { deep: true }
+  { deep: true },
 );
 </script>
 
 <template>
   <div
-    class="flex flex-col justify-end h-96 py-2 mt-8 border border-gray-300 dark:border-gray-800 rounded-lg"
+    class="mt-8 flex h-96 flex-col justify-end rounded-lg border border-gray-300 py-2 dark:border-gray-800"
   >
-    <div ref="messagesContainer" class="p-4 overflow-y-auto max-h-fit">
+    <div ref="messagesContainer" class="max-h-fit overflow-y-auto p-4">
       <div
         v-for="message in messages"
         :key="message.id"
-        class="flex items-center mb-4"
+        class="mb-4 flex items-center"
       >
         <div
           v-if="message.sender_id === me.id"
-          class="py-2 px-4 w-5/6 ml-auto text-white bg-blue-500 dark:bg-blue-700 rounded-lg"
+          class="ml-auto w-5/6 rounded-lg bg-blue-500 px-4 py-2 text-white dark:bg-blue-700"
         >
           <MyMessage :message />
         </div>
         <div
           v-else
-          class="py-2 px-4 w-5/6 mr-auto bg-gray-200 dark:bg-gray-700 dark:text-gray-50 rounded-lg"
+          class="mr-auto w-5/6 rounded-lg bg-gray-200 px-4 py-2 dark:bg-gray-700 dark:text-gray-50"
         >
           <PartnerMessage :message :imageSrc="chat.partner.profile_photo_url" />
         </div>

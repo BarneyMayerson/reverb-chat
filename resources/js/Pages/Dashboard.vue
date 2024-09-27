@@ -6,9 +6,9 @@ import { Head } from "@inertiajs/vue3";
   <Head title="Dashboard" />
 
   <div class="py-12">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div
-        class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg"
+        class="overflow-hidden bg-white shadow-xl sm:rounded-lg dark:bg-gray-800"
       >
         &nbsp;
       </div>

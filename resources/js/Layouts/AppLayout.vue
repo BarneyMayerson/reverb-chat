@@ -17,8 +17,8 @@ import PrimaryMenu from "@/Components/Menus/PrimaryMenu.vue";
 
     <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
       <!-- Page Heading -->
-      <header v-if="$slots.header" class="bg-white dark:bg-gray-800 shadow">
-        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+      <header v-if="$slots.header" class="bg-white shadow dark:bg-gray-800">
+        <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
           <slot name="header" />
         </div>
       </header>

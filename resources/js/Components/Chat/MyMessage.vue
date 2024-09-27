@@ -9,7 +9,7 @@ defineProps({
 
 <template>
   {{ message.text }}
-  <span class="block text-xs font-semibold text-gray-100 text-right">
+  <span class="block text-right text-xs font-semibold text-gray-100">
     {{ message.created_at }}
   </span>
 </template>
